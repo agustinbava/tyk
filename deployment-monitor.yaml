@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-monitor-deployment
+  labels:
+    app: deployment-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-monitor
+  template:
+    metadata:
+      labels:
+        app: deployment-monitor
+    spec:
+      serviceAccountName: deployment-monitor
+      containers:
+      - name: deployment-monitor
+        image: agustinbava/deployment-monitor-image:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
